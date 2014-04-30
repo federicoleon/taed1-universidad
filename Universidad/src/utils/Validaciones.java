@@ -53,7 +53,7 @@ public class Validaciones {
 		try {
 			return Integer.parseInt(text);
 		} catch(NumberFormatException e) {
-			return null;
+			throw new ExcepcionStringANumero();
 		}
 	}
 }

@@ -1,6 +1,8 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import servicios.AlumnoService;
 import carreras.IngenieriaEnSoftware;
 import enums.Carreras;
@@ -38,6 +40,17 @@ public class Universidad {
 		}else{
 			return null;
 		}
+	}
+	
+	public Alumno getAlumno(int idAlumno) {
+		Iterator<Alumno> iterador = this.alumnos.iterator();
+		while(iterador.hasNext()) {
+			Alumno aux = iterador.next();
+			if(aux.getIdAlumno() == idAlumno) {
+				return aux;
+			}
+		}
+		return null;
 	}
 	
 	public int getCantidadAlumnos() {

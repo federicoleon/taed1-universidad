@@ -51,24 +51,18 @@ public class Principal extends JFrame {
 		});
 		MainMenu.add(mntmConsultaAlumnos);
 		
-		JMenu mnCarreras = new JMenu("Carreras");
-		menuBar.add(mnCarreras);
-		
-		JMenuItem mntmConsultaDeCarreras = new JMenuItem("Consulta de carreras");
-		mnCarreras.add(mntmConsultaDeCarreras);
-		
 		JMenu mnMaterias = new JMenu("Materias");
-		mnCarreras.add(mnMaterias);
+		menuBar.add(mnMaterias);
 		
-		JMenuItem mntmMateriasPorCarrera = new JMenuItem("Materias por carrera");
-		mntmMateriasPorCarrera.addActionListener(new ActionListener() {
+		JMenuItem mntmMateriasPorAlumno = new JMenuItem("Materias por alumno");
+		mntmMateriasPorAlumno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				MateriasXCarrera materiasXCarrera = new MateriasXCarrera(principal);
-				materiasXCarrera.setLocationRelativeTo(null);
-				materiasXCarrera.setVisible(true);
+				MateriasXAlumno materias = new MateriasXAlumno(principal);
+				materias.setLocationRelativeTo(null);
+				materias.setVisible(true);
 			}
 		});
-		mnMaterias.add(mntmMateriasPorCarrera);
+		mnMaterias.add(mntmMateriasPorAlumno);
 		
 		JMenu mnSesinActual = new JMenu("Sesi\u00F3n actual");
 		menuBar.add(mnSesinActual);

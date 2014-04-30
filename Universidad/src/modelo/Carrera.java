@@ -1,18 +1,18 @@
 package modelo;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import enums.Carreras;
 import enums.MateriasIngenieriaEnSoftware;
 
 public abstract class Carrera {
 	private int id;
 	private String nombre;
-	private HashMap <Integer,Materia> materias;
+	private ArrayList <Materia> materias;
 	
 	public Carrera() {
 		this.id = 0;
 		this.nombre = "No asignada";
-		this.materias = new HashMap <Integer,Materia>();
+		this.materias = new ArrayList <Materia>();
 	}
 	
 	public Carrera(Carreras carrera) {
@@ -33,32 +33,32 @@ public abstract class Carrera {
 		}
 	}
 	
-	public HashMap<Integer,Materia> getMaterias() {
+	public ArrayList<Materia> getMaterias() {
 		if(this.materias == null) {
-			this.materias = new HashMap <Integer,Materia>();
+			this.materias = new ArrayList <Materia>();
 		}
 		return this.materias;
 	}
 	
-	public HashMap<Integer,Materia> getMaterias(int anioDictado) {
-		HashMap<Integer,Materia> result = new HashMap<Integer,Materia>();
+	public ArrayList<Materia> getMaterias(int anioDictado) {
+		ArrayList<Materia> result = new ArrayList<Materia>();
 		Materia aux = null;
 		for(int i=0; i<this.materias.size(); i++) {
 			aux = this.materias.get(i+1);
 			if(aux.getAnioDictado() == anioDictado) {
-				result.put(aux.getId(), aux);
+				result.add(aux);
 			}
 		}
 		return result;
 	}
 	
-	public HashMap<Integer,Materia> getMaterias(int anioDictado, int semestreDictado) {
-		HashMap<Integer,Materia> result = new HashMap<Integer,Materia>();
+	public ArrayList<Materia> getMaterias(int anioDictado, int semestreDictado) {
+		ArrayList<Materia> result = new ArrayList<Materia>();
 		Materia aux = null;
 		for(int i=0; i<this.materias.size(); i++) {
 			aux = this.materias.get(i+1);
 			if(aux.getAnioDictado() == anioDictado && aux.getSemestreDictado() == semestreDictado) {
-				result.put(aux.getId(), aux);
+				result.add(aux);
 			}
 		}
 		return result;

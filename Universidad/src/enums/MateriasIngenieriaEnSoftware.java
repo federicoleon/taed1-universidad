@@ -1,6 +1,6 @@
 package enums;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import modelo.Materia;
 
 public enum MateriasIngenieriaEnSoftware {
@@ -83,16 +83,16 @@ public enum MateriasIngenieriaEnSoftware {
 		return this.semestreDictado;
 	}
 	
-	public static HashMap<Integer,Materia> getMaterias() {
+	public static ArrayList<Materia> getMaterias() {
 		MateriasIngenieriaEnSoftware aux[] = MateriasIngenieriaEnSoftware.values();
-		HashMap<Integer, Materia> resultado = new HashMap<Integer, Materia>();
+		ArrayList<Materia> resultado = new ArrayList<Materia>();
 		for(int i=0; i<aux.length; i++) {
 			Materia materia = new Materia(
 				aux[i].getId(),
 				aux[i].getNombre(),
 				aux[i].getAnioDictado(),
 				aux[i].getSemestreDictado());
-			resultado.put(materia.getId(), materia);
+			resultado.add(materia);
 		}
 		return resultado;
 	}

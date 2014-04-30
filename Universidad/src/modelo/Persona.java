@@ -31,14 +31,9 @@ public abstract class Persona {
 	}
 	
 	public String toString() {
-		StringBuilder result = new StringBuilder("Apellido: ");
-		result.append(this.getApellido());
-		result.append("\n");
-		result.append("Nombre: ");
+		StringBuilder result = new StringBuilder(this.getApellido());
+		result.append(", ");
 		result.append(this.getNombre());
-		result.append("\n");
-		result.append("DNI: ");
-		result.append(this.getDni());
 		return result.toString();
 	}
 }

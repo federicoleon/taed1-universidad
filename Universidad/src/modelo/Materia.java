@@ -65,7 +65,7 @@ public class Materia {
     
     @Override
     public int hashCode() {
-    	return this.getId();
+    	return this.getNombre().hashCode();
     }
     
     public String toString() {

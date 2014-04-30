@@ -2,9 +2,8 @@ package servicios;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import enums.Carreras;
-
+import java.sql.Connection;
+import java.sql.SQLException;
 import modelo.Alumno;
 import modelo.Modelo;
 
@@ -19,11 +18,18 @@ public class AlumnoService {
 	private MySQLService mysqlService = MySQLService.getInstance();
 	
 	public boolean agregarAlumno(Alumno alumno) {
+		Connection connection = mysqlService.getConexion();
+		try {
+			connection.setAutoCommit(false);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 		StringBuilder query = new StringBuilder();
 		query.append("INSERT INTO alumnos ");
 		query.append("(apellidos, nombres, dni, legajo)");
 		query.append("VALUES( ?, ?, ?, ? )");
 		int idAlumno = mysqlService.executeInsert(
+			connection,
 			query.toString(), 
 			alumno.getApellido(),
 			alumno.getNombre(),
@@ -32,20 +38,43 @@ public class AlumnoService {
 		);
 		alumno.setIdAlumno(idAlumno);
 		if(idAlumno > 0) {
-			boolean resultadoUsuario = usuarioService.agregarUsuarioDesdeAlumno(alumno);
-			boolean resultadoCarrera = this.agregarAlumnoACarrera(alumno);
-			return (idAlumno > 0) && resultadoUsuario && resultadoCarrera;
+			boolean resultadoUsuario = usuarioService.agregarUsuarioDesdeAlumno(connection, alumno);
+			boolean resultadoCarrera = this.agregarAlumnoACarrera(connection, alumno);
+			if ((idAlumno > 0) && resultadoUsuario && resultadoCarrera) {
+				try {
+					connection.commit();
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return true;
+			}else{
+				try {
+					connection.rollback();
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return false;
+			}
 		}else{
+			try {
+				connection.rollback();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			return false;
 		}
 	}
 	
-	private boolean agregarAlumnoACarrera(Alumno alumno) {
+	private boolean agregarAlumnoACarrera(Connection connection, Alumno alumno) {
 		StringBuilder query = new StringBuilder();
 		query.append("INSERT INTO carrerasxalumno ");
 		query.append("(idCarrera, idAlumno)");
 		query.append("VALUES( ?, ?)");
 		int resultado = mysqlService.executeInsert(
+			connection,
 			query.toString(), 
 			alumno.getCarrera().getId(),
 			alumno.getIdAlumno()

@@ -9,7 +9,10 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JPasswordField;
 
+import excepciones.ExcepcionStringANumero;
+
 import servicios.LoginService;
+import utils.Validaciones;
 
 import java.awt.Frame;
 import java.awt.event.ActionListener;
@@ -99,7 +102,7 @@ public class Login extends JDialog {
 		this.password = new StringBuilder();
 		int dni = 0;
 		try {
-			dni = Integer.parseInt(txtDocumento.getText().trim());
+			dni = Validaciones.convertirANumero(txtDocumento.getText().trim());
 			char[] passwordAux = txtPassword.getPassword();
 			for(int i=0; i<passwordAux.length; i++) {
 				this.password.append(passwordAux[i]);
@@ -113,7 +116,7 @@ public class Login extends JDialog {
 			}else{
 				lblMensajes.setText("Error: DNI o contrase–a incorrectos.");
 			}
-		} catch(Exception e) {
+		} catch(ExcepcionStringANumero e) {
 			lblMensajes.setText("Documento incorrecto!");
 		}
 	}

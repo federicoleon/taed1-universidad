@@ -7,11 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import carreras.IngenieriaEnSoftware;
-
-import enums.Carreras;
-
 import modelo.Alumno;
 import modelo.Carrera;
 import modelo.Modelo;
@@ -23,11 +19,8 @@ public class MySQLService {
 	private static final String PASSWORD="";
 	private static final String SERVIDOR = "jdbc:mysql://localhost/".concat(DB_NAME);
 	private static MySQLService instance;
-	private Connection conexion;
 	 
-	public MySQLService() {
-		this.connect();
-	}
+	public MySQLService() {}
 	
 	public static MySQLService getInstance() {
 		if (MySQLService.instance == null) {
@@ -36,21 +29,18 @@ public class MySQLService {
 		return instance;
 	}
 	
-	public void connect() {
+	public Connection getConexion() {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			conexion = DriverManager.getConnection(SERVIDOR, USER, PASSWORD);
+			Connection connection = DriverManager.getConnection(SERVIDOR, USER, PASSWORD);
+			return connection;
 		} catch(Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 	
-	public Connection getConexion() {
-		return conexion;
-	}
-	
-	public int executeInsert(String query, Object... parameters) {
-		Connection connection = getConexion();
+	public int executeInsert(Connection connection, String query, Object... parameters) {
 		int resultado = 0;
 		try {
 			PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -64,11 +54,18 @@ public class MySQLService {
 				resultado = 0;
 			} finally {
 				statement.close();
+				if(connection.getAutoCommit()) {
+					connection.close();
+				}
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		return resultado;
+	}
+	
+	public int executeInsert(String query, Object... parameters) {
+		return this.executeInsert(this.getConexion(), query, parameters);
 	}
 	
 	public Object executeSelect(int expectedInstance, String query, Object... parameters) {
@@ -123,6 +120,7 @@ public class MySQLService {
 					resultSet.close();
 				}	
 				statement.close();
+				connection.close();
 			} catch(SQLException e) {
 				e.printStackTrace();
 				return null;
@@ -163,6 +161,7 @@ public class MySQLService {
 					resultSet.close();
 				}	
 				statement.close();
+				connection.close();
 			} catch(SQLException e) {
 				e.printStackTrace();
 				return null;

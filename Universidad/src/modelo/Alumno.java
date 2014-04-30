@@ -1,9 +1,12 @@
 package modelo;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Alumno extends Persona {
 	private int idAlumno;
+	private String legajo;
+	private Carrera carrera;
+	private ArrayList <Materia> materias;
 	
 	public int getIdAlumno() {
 		return idAlumno;
@@ -12,14 +15,10 @@ public class Alumno extends Persona {
 	public void setIdAlumno(int idAlumno) {
 		this.idAlumno = idAlumno;
 	}
-
-	private String legajo;
-	private Carrera carrera;
-	private HashMap <Integer,Materia> materias;
 	
 	public Alumno(String apellido, String nombre, int dni) {
 		super(apellido, nombre, dni);
-		this.materias = new HashMap <Integer,Materia>();
+		this.materias = new ArrayList <Materia>();
 	}
 	
 	public void setLegajo(String legajo) {
@@ -50,7 +49,7 @@ public class Alumno extends Persona {
 		this.carrera = carrera;
 	}
 	
-	public HashMap <Integer,Materia> getMaterias() {
+	public ArrayList <Materia> getMaterias() {
 		return this.materias;
 	}
 	

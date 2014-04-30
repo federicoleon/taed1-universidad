@@ -3,18 +3,20 @@ package servicios;
 import utils.Seguridad;
 import modelo.Alumno;
 import modelo.Modelo;
+import java.sql.Connection;
 
 public class UsuarioService {
 	
 	private MySQLService mysqlService = MySQLService.getInstance();
 	
-	public boolean agregarUsuarioDesdeAlumno(Alumno alumno) {
+	public boolean agregarUsuarioDesdeAlumno(Connection connection, Alumno alumno) {
 		int resultado = 0;
 		StringBuilder query = new StringBuilder();
 		query.append("INSERT INTO usuarios ");
 		query.append("(dni, password)");
 		query.append("VALUES( ?, ? )");
 		resultado = mysqlService.executeInsert(
+			connection, 
 			query.toString(), 
 			alumno.getDni(),
 			Seguridad.encriptarConMD5(alumno.getDni())
