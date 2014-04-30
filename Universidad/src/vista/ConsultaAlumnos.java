@@ -69,6 +69,29 @@ public class ConsultaAlumnos extends JDialog {
 		lblPuedeEncontrarEl.setBounds(6, 11, 344, 16);
 		panel.add(lblPuedeEncontrarEl);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		this.cargarAlumnos();
+	}
+	
+	private void cargarAlumnos() {
+		DefaultTableModel modelo = new DefaultTableModel();
+		modelo.addColumn("Apellido");
+		modelo.addColumn("Nombres");
+		modelo.addColumn("DNI");
+		modelo.addColumn("Legajo");
+		modelo.addColumn("Carrera");
+		ArrayList <Alumno> alumnos = this.principal.getUniversidad().getAlumnos();
+		Iterator<Alumno> iterator = alumnos.iterator();
+		while(iterator.hasNext()) {
+		    Alumno alumno = iterator.next();
+		    Object fila[] = new Object[5];
+		    fila[0] = alumno.getApellido();
+		    fila[1] = alumno.getNombre();
+		    fila[2] = alumno.getDni();
+		    fila[3] = alumno.getLegajo();
+		    fila[4] = alumno.getCarrera().getNombre();
+		    modelo.addRow(fila);
+		}
+		table.setModel(modelo);
 	}
 }
