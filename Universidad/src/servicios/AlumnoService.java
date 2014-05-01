@@ -40,21 +40,18 @@ public class AlumnoService {
 		if(idAlumno > 0) {
 			boolean resultadoUsuario = usuarioService.agregarUsuarioDesdeAlumno(connection, alumno);
 			boolean resultadoCarrera = this.agregarAlumnoACarrera(connection, alumno);
-			if ((idAlumno > 0) && resultadoUsuario && resultadoCarrera) {
-				try {
+			try {
+				if ((idAlumno > 0) && resultadoUsuario && resultadoCarrera) {
 					connection.commit();
 					connection.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				return true;
-			}else{
-				try {
+					return true;
+				}else{
 					connection.rollback();
 					connection.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+					return false;
 				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 				return false;
 			}
 		}else{
