@@ -1,8 +1,6 @@
 package vista;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -10,12 +8,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.BoxLayout;
-import javax.swing.SwingConstants;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -58,6 +50,7 @@ public class ConsultaAlumnos extends JDialog {
 		
 		JButton btnCerrar = new JButton("Cerrar");
 		btnCerrar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}

@@ -68,7 +68,8 @@ public class Materia {
     	return this.getNombre().hashCode();
     }
     
-    public String toString() {
+    @Override
+	public String toString() {
     	StringBuilder result = new StringBuilder("\n");
     	result.append("ID:"); 
     	result.append(this.getId());

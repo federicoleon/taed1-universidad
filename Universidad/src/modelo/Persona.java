@@ -30,6 +30,7 @@ public abstract class Persona {
 		this.dni = dni;
 	}
 	
+	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder(this.getApellido());
 		result.append(", ");

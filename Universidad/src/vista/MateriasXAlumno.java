@@ -51,6 +51,7 @@ public class MateriasXAlumno extends JDialog {
 		
 		comboALumno = new JComboBox();
 		comboALumno.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				getMateriasPorAlumno();
 			}
@@ -59,6 +60,7 @@ public class MateriasXAlumno extends JDialog {
 		
 		JButton btnCerrar = new JButton("Cerrar");
 		btnCerrar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 			}
@@ -161,6 +163,7 @@ public class MateriasXAlumno extends JDialog {
 			return this.alumno;
 		}
 		
+		@Override
 		public String toString() {
 			return (this.alumno.getApellido().concat(", ").concat(this.alumno.getNombre())).toUpperCase();
 		}

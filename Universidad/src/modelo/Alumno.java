@@ -53,7 +53,8 @@ public class Alumno extends Persona {
 		return this.materias;
 	}
 	
-    public boolean equals(Object object) {
+    @Override
+	public boolean equals(Object object) {
 	    if (object instanceof Alumno) {
 	    	Alumno aux = (Alumno)object;
 		    return (super.getDni() == aux.getDni());
@@ -62,11 +63,13 @@ public class Alumno extends Persona {
 	    }
     }
     
-    public int hashCode() {
+    @Override
+	public int hashCode() {
     	return this.getDni();
     }
 	
-    public String toString() {
+    @Override
+	public String toString() {
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append("\n");
 		result.append("Legajo: ");

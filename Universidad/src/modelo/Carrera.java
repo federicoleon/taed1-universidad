@@ -72,6 +72,7 @@ public abstract class Carrera {
 		}
 	}
 	
+	@Override
 	public String toString() {
 		StringBuilder resultado = new StringBuilder();
 		resultado.append("ID: ");

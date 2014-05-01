@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.WindowConstants;
 
 import modelo.Alumno;
 import modelo.Carrera;
@@ -38,7 +39,7 @@ public class NuevoAlumno extends JDialog {
 		
 		setResizable(false);
 		setTitle("Nuevo alumno");
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setModal(true);
 		setBounds(100, 100, 340, 292);
 		getContentPane().setLayout(null);
@@ -73,6 +74,7 @@ public class NuevoAlumno extends JDialog {
 		JButton btnAceptar = new JButton("Aceptar");
 		this.getRootPane().setDefaultButton(btnAceptar);
 		btnAceptar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				crearAlumno();
 			}
@@ -82,6 +84,7 @@ public class NuevoAlumno extends JDialog {
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 			}

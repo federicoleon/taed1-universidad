@@ -125,10 +125,7 @@ public class MateriasXAlumno extends JDialog {
 	
 	private void getMateriasPorAlumno() {
 		AlumnoEnLista aux = (AlumnoEnLista)this.comboALumno.getSelectedItem();
-		StringBuilder nombreCompleto = new StringBuilder(aux.getAlumno().getApellido().toUpperCase());
-		nombreCompleto.append(", ");
-		nombreCompleto.append(aux.getAlumno().getNombre().toUpperCase());
-		this.lblNombreCarrera.setText(nombreCompleto.toString());
+		this.lblNombreCarrera.setText(aux.getAlumno().getCarrera().getNombre().toUpperCase());
 		Alumno alumno = this.principal.getUniversidad().getAlumno(aux.getAlumno().getIdAlumno());
 		ArrayList<Materia> materias = alumno.getCarrera().getMaterias();
 		DefaultTableModel modelo = new DefaultTableModel(

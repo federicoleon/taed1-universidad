@@ -33,6 +33,7 @@ public class Principal extends JFrame {
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Nuevo alumno");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				NuevoAlumno nuevoAlumno = new NuevoAlumno(principal);
 				nuevoAlumno.setLocationRelativeTo(null);
@@ -43,6 +44,7 @@ public class Principal extends JFrame {
 		
 		JMenuItem mntmConsultaAlumnos = new JMenuItem("Consulta alumnos");
 		mntmConsultaAlumnos.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ConsultaAlumnos consultaAlumnos = new ConsultaAlumnos(principal);
 				consultaAlumnos.setLocationRelativeTo(null);
@@ -56,6 +58,7 @@ public class Principal extends JFrame {
 		
 		JMenuItem mntmMateriasPorAlumno = new JMenuItem("Materias por alumno");
 		mntmMateriasPorAlumno.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				MateriasXAlumno materias = new MateriasXAlumno(principal);
 				materias.setLocationRelativeTo(null);
@@ -69,6 +72,7 @@ public class Principal extends JFrame {
 		
 		JMenuItem mntmSalir = new JMenuItem("Salir");
 		mntmSalir.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
 			}
